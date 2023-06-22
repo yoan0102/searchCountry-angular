@@ -1,15 +1,21 @@
 import { Component } from '@angular/core';
 
+import { CountriesService } from '../../services/country.service';
+import { Country } from '../../interfaces/country';
+
 @Component({
   selector: 'app-by-capital-page',
   templateUrl: './by-capital-page.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class ByCapitalPageComponent {
+  public countries: Country[] = [];
 
-  searchByCapital(term:string):void{
-    console.log(term);
+  constructor(private readonly countriesService: CountriesService) {}
+
+  searchByCapital(term: string): void {
+    this.countriesService.searchCapital(term).subscribe((countries) => {
+      this.countries = countries;
+    });
   }
-
 }
